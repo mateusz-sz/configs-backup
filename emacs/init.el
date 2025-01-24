@@ -105,3 +105,7 @@
  '(rainbow-delimiters-depth-8-face ((t (:foreground "dark orange"))))
  '(rainbow-delimiters-depth-9-face ((t (:foreground "orange red"))))
  '(show-paren-match ((t (:background "green" :foreground "#FFFFFF" :weight bold)))))
+
+
+;; Keepit specific config
+(setenv "CL_SOURCE_REGISTRY" "(:source-registry (:include \"/home/msz/keepit/asdf.conf\") :inherit-configuration)")
