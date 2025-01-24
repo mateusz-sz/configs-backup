@@ -1,0 +1,12 @@
+[user]
+	name = Mateusz Szalowski
+	email = mateusz.sz@protonmail.com
+[core]
+	editor = vim
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+[credential]
+	helper = cache
