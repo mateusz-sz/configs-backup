@@ -1,0 +1,16 @@
+-- prevent noisy loading of psqlrc file
+\set QUIET yes
+--customize prompt
+\set PROMPT1 '\n%[%033[1;31m%]➤ %[%033[2;37m%]%`\! date "+%F %I:%M %p %Z"`%[%033[0m%] %[%033[1;36m%]%n%@%/%[%033[1;31m%]%x %[%033[K%]%[%033[0m%]\n%[%033[1;33m%]%R%#%[%033[0m%] '
+\set PROMPT2 '%[%033[1;33m%]%R%#%[%033[0m%] '
+--show timing info for queries
+\timing
+-- allow pasting of values to avoid stupid indenting
+\set paste
+--get rid of duplicates in history
+\set HISTCONTROL ignoredups
+\set HISTSIZE 5000
+--set noisyness back to normal
+\unset QUIET
+\set cleanup 'select scheduled_cleanup();';
+
