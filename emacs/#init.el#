@@ -1,3 +1,4 @@
+
  ;;;;;;;;;;;;;;
 ;; Packages ;;
 ;;;;;;;;;;;;;;
@@ -87,7 +88,7 @@
  ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
  '(package-selected-packages
-   '(markdown-mode slime rainbow-delimiters rainbow-mode tron-legacy-theme use-package))
+   '(slime rainbow-delimiters rainbow-mode tron-legacy-theme use-package))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
