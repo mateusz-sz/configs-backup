@@ -31,21 +31,18 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec --no-startup-id gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-
-# start dmenu Mac Book style
-bindsym $mod+space exec --no-startup-id dmenu_run 
+bindsym $mod+d exec --no-startup-id dmenu_run
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+j focus left
@@ -139,7 +136,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -177,14 +174,19 @@ bar {
 # Custom configuration
 
 # Control light by keyboard f4 & f5 keys
-bindsym XF86MonBrightnessDown exec --no-startup-id  light -U 5
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
+#bindsym XF86MonBrightnessDown exec --no-startup-id  light -U 5
+#bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+
 
 # Block screen & suspend
-bindsym Control+Mod1+Delete  exec --no-startup-id i3lock -i /home/normie/.config/i3/filesystem.png && systemctl suspend
+#bindsym Control+Mod1+Delete  exec --no-startup-id i3lock -i ~/.config/i3/emacs_cheat_sheet.png && systemctl suspend
+bindsym Control+Mod1+Delete exec --no-startup-id /usr/bin/blurlock && systemctl suspend
 
 # Block screen only
-bindsym Control+Mod1+p exec --no-startup-id i3lock -i /home/normie/.config/i3/filesystem.png
+#bindsym Control+Mod1+p exec --no-startup-id i3lock -i ~/.config/i3/emacs_cheat_sheet.png
+bindsym Control+Mod1+p exec --no-startup-id /usr/bin/blurlock
 
 # Toggle keyboard layout between "pl" and "de"
 #bindsym Mod1+space exec --no-startup-id /home/normie/scripts/toggle_keyboard_layout.sh
@@ -217,17 +219,18 @@ exec --no-startup-id setxkbmap pl
 bindsym Print exec --no-startup-id flameshot full -c
 
 # Zenity calendar shortcut
-bindsym $mod+c exec zenity --calendar
+bindsym $mod+c exec --no-startup-id zenity --calendar
 
+#
+# MOVED TO LIBINPUT RULES. DOES IT WORK AND CAN THIS CODE BELOW BE REMOVED?
+#
 # Enable Touchpad natural scroll
-exec --no-startup-id xinput set-prop "ELAN2301:00 04F3:306B Touchpad" "libinput Natural Scrolling Enabled" 1
-
+#exec --no-startup-id xinput set-prop "ELAN2301:00 04F3:306B Touchpad" "libinput Natural Scrolling Enabled" 1
 # Configure Logitech mouse
-exec --no-startup-id xinput set-prop 'MX Master 3S Mouse' 'libinput Natural Scrolling Enabled' 1
-exec --no-startup-id xinput set-prop 'MX Master 3S Mouse' 'libinput Accel Speed' -0.75
-
+#exec --no-startup-id xinput set-prop 'MX Master 3S Mouse' 'libinput Natural Scrolling Enabled' 1
+#exec --no-startup-id xinput set-prop 'MX Master 3S Mouse' 'libinput Accel Speed' -0.75
 # Enable tap to click
-exec --no-startup-id xinput set-prop "ELAN2301:00 04F3:306B Touchpad" "libinput Tapping Enabled" 1
+#exec --no-startup-id xinput set-prop "ELAN2301:00 04F3:306B Touchpad" "libinput Tapping Enabled" 1
 
 # Spotify control via dbus
 bindsym Control+XF86AudioRaiseVolume exec --no-startup-id dbus-send --dest=org.mpris.MediaPlayer2.spotify --type=method_call /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
@@ -241,16 +244,17 @@ bindsym XF86AudioPlay exec --no-startup-id dbus-send --dest=org.mpris.MediaPlaye
 for_window [title="Calculator"] floating enable
 
 # Prevent computer from sleeping
-exec xset s off
-exec xset -dpms
-exec xset s noblank
+exec --no-startup-id xset s off
+exec --no-startup-id xset -dpms
+exec --no-startup-id xset s noblank
 
-# Run KDE-connect deamon on startup
-exec --no-startup-id /usr/lib/x86_64-linux-gnu/libexec/kdeconnectd
+# Allow for popups in fullscreen mode
+popup_during_fullscreen leave_fullscreen
+    # more info: https://i3wm.org/docs/userguide.html#_popups_during_fullscreen_mode
 
-# Setup key-bindings for OpenBoard color changing (F1-F5)
-# the config for this is in ~/.xbindkeysrc
-exec --no-startup-id xbindkeys
+# open Teams and Outlook on workspace 9
+bindsym $mod+Shift+b exec --no-startup-id i3-msg 'workspace 9; exec $HOME/apps/teams_chrome_launch.sh'
 
-# Setup GAOMON keys
-exec --no-startup-id /usr/local/bin/assign-tablet-buttons.sh
+
+# Setup wallpaper
+exec_always --no-startup-id feh --bg-max "/home/msz/configs-backup/i3/emacs_reference_1.png" 
