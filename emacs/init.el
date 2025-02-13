@@ -1,6 +1,6 @@
- ;;;;;;;;;;;;;;
-;; Packages ;;
-;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; Package management ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'package)
 (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
@@ -20,6 +20,14 @@
     (comment-or-uncomment-region beg end)))
 
 (global-set-key (kbd "C-/") 'comment-or-uncomment-region-or-line)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; git version control ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package magit
+  :ensure t
+  :bind (("M-g M-s" . magit-status)
+	 ("M-g M-b" . magit-blame)))
 
 
 ;;;;;;;;;;;;;;;;;
@@ -87,7 +95,7 @@
  ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
  '(package-selected-packages
-   '(markdown-mode slime rainbow-delimiters rainbow-mode tron-legacy-theme use-package))
+   '(magit markdown-mode slime rainbow-delimiters rainbow-mode tron-legacy-theme use-package))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
