@@ -60,26 +60,6 @@
          ("C-c ~" . slime-sync-package-and-default-directory)))
 
 
-;; Sticky function header while scrolling
-(which-function-mode 1)
-;; (which-function-mode)
-(setq-default header-line-format
-              '((which-func-mode ("" which-func-format " "))))
-(setq mode-line-misc-info
-      (assq-delete-all 'which-func-mode mode-line-misc-info))
-
-;; Use spaces instead of tabs
-(setq-default indent-tabs-mode nil)
-
-;; Folding functions
-(add-hook 'prog-mode-hook #'hs-minor-mode)
-(global-set-key (kbd "C-c <right>") 'hs-show-block)
-(global-set-key (kbd "C-c <left>") 'hs-hide-block)
-
-
-
-
-
 ;;;;;;;;;;;;
 ;; Colors ;;
 ;;;;;;;;;;;;
@@ -116,14 +96,13 @@
  '(blink-cursor-mode nil)
  '(package-selected-packages
    '(magit markdown-mode slime rainbow-delimiters rainbow-mode tron-legacy-theme use-package))
- '(tool-bar-mode nil)
- '(display-line-numbers-mode 1))
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Noto Sans Mono" :foundry "GOOG" :slant normal :weight normal :height 128 :width normal))))
+ '(default ((t (:family "Noto Sans Mono" :foundry "GOOG" :slant normal :weight normal :height 163 :width normal))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "dark violet"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "dodger blue"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "cyan"))))
@@ -135,7 +114,6 @@
  '(rainbow-delimiters-depth-9-face ((t (:foreground "orange red"))))
  '(show-paren-match ((t (:background "green" :foreground "#FFFFFF" :weight bold)))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Keepit specific config ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Keepit specific config
 (setenv "CL_SOURCE_REGISTRY" "(:source-registry (:include \"/home/msz/keepit/asdf.conf\") :inherit-configuration)")
